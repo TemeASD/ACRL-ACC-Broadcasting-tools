@@ -14,10 +14,10 @@ Some broadcasting tools for ACC. Still heavily work in progress and you probably
 * Use qualification results for grid order
 * Fix the conditions panel
 * Create "track intro" page, real track maps from somewhere and data from UDP API
-* 
+
 ## Basic installation
 
-- Create a config.js to app folder. Should look like this:
+* Create a config.js to app folder. Should look like this:
 
 ```js
 const config = {
@@ -29,6 +29,18 @@ const config = {
     'DISPLAY_NAME': '',
     'CONNECTION_PASSWORD': '',
     'COMMAND_PASSWORD': '',
+}
+```
+
+* Go to `C:\Users\${YOUR USERNAME}\Documents\Assetto Corsa Competizione\Config`
+* Open up broadcasting.json
+* Set the values to correct ones, example
+  
+```json
+{
+    "updListenerPort": 9000,
+    "connectionPassword": "pw",
+    "commandPassword": "pw"
 }
 
 ```
