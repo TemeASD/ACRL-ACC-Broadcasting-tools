@@ -9,7 +9,13 @@ Some broadcasting tools for ACC. Still heavily work in progress and you probably
 
 ## TODO
 
-* Improve logic behind fastest laps to acknowledge multiclass races
+* Improve configuration system to work with prod and dev servers
+  * views folder:
+    * correct addresses for socketio assets
+    * correct socketio connect address
+* Improve logic behind "fastest lap" feature
+  * Acknowledge multiclass races
+  * Reset fastest lap between sessions
 * Configurable URL for grid order (now comes from ACRLonline)
 * Use qualification results for grid order
 * Fix the conditions panel
