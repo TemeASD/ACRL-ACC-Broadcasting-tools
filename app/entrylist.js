@@ -12,7 +12,7 @@ const entrylist = {
     *Returns a the full entry of a car 
     *@param {string} teamName of the team in verbatim
     **/
-    getCarByTeamName: (teamMame) => {
+    getCarByTeamName: (teamName) => {
         for (i in list) {
             if(list[i].teamName === teamName) {
                 return list[i]

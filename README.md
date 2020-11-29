@@ -47,9 +47,9 @@ const config = {
 
 ### Dependencies
 
-- Node.js v12+
-- npm
-- Assetto Corsa Competizione
+* Node.js v12+
+* npm
+* Assetto Corsa Competizione
 
 ### Setup
 
@@ -64,8 +64,8 @@ $ npm install
 
 ```shell
 $ node index.js
-
 ```
+
 ## Collaborating
 
 Shoot a pull request and I'll most likely merge it.
@@ -74,5 +74,5 @@ Shoot a pull request and I'll most likely merge it.
 
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
-- **[MIT license](http://opensource.org/licenses/mit-license.php)**
-- Copyright 2020 © <a href="temeasd.github.io" target="_blank">TemeASD</a>.
+* **[MIT license](http://opensource.org/licenses/mit-license.php)**
+* Copyright 2020 © <a href="temeasd.github.io" target="_blank">TemeASD</a>.
