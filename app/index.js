@@ -14,15 +14,18 @@ const io = require('socket.io')(server);
 const mustacheExpress = require('mustache-express');
 const gridOrder = require('./grid');
 const events = require('events');
+
 /*USER DEFINED CONSTANTS */
-const http_port = 3000;
-const socketio_port = 3001;
-const HOST = '127.0.0.1';
-const PORT = 9000;
-const LOCAL_PORT = 6667;
-const DISPLAY_NAME = 'Tim';
-const CONNECTION_PASSWORD = 'asd';
-const COMMAND_PASSWORD = 'updPw';
+const cfg = require('config');
+const HTTP_PORT = cgf.HTTP_PORT;
+const SOCKETIO_PORT = cfg.SOCKETIO_PORT;
+const HOST = cfg.ACC_IP_HOST;
+const LISTENER_UDP = cfg.LISTENER_UDP;
+const ACC_UDP_PORT = cfg.ACC_UDP_PORT;
+const DISPLAY_NAME = cfg.DISPLAY_NAME;
+const CONNECTION_PASSWORD = cfg.CONNECTION_PASSWORD;
+const COMMAND_PASSWORD = cfg.COMMAND_PASSWORD;
+
 /*SHIT VARIABLES THAT SUCK DICK HERE */
 
 let globalRealtimeTick = {}
@@ -31,14 +34,13 @@ const onClientConnectedCallback = (callback) => {
 }
 
 /*HTTP PART :D */
-server.listen(socketio_port)
+server.listen(SOCKETIO_PORT)
 
 app.use(express.static('./'))
 app.engine('html', mustacheExpress());
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views/');
 app.get('/starting-grid', (req, res) => {
-
     gridOrder.getGrid()
         .then(response => {
             let jsons = gridOrder.sortGrid(response);
@@ -57,8 +59,8 @@ app.get('/fastest-lap/test', (req, res) => {
     res.render('fastest_lap_test')
 })
 
-app.listen(http_port, () => {
-    console.log(`Webserver at http://localhost:${http_port}`);
+app.listen(HTTP_PORT, () => {
+    console.log(`Webserver at http://localhost:${HTTP_PORT}`);
 })
 /*EVENT EMITER FOR FASTEST LAPS*/
 let fl = new events.EventEmitter();
@@ -97,7 +99,7 @@ io.sockets.on('connection', (socket) => {
 /*ACC PART*/
 /*--------*/
 const acc = dgram.createSocket('udp4');
-acc.bind(LOCAL_PORT);
+acc.bind(ACC_UDP_PORT);
 reqRes = {}
 /*UPDATE ENTRY LIST PERIODICALLY*/
 setInterval(() => {
@@ -318,12 +320,12 @@ function handleError(err) {
 
 
 const requestConnection = api.requestConnection(DISPLAY_NAME, CONNECTION_PASSWORD, COMMAND_PASSWORD);
-const connection = acc.send(requestConnection, 0, requestConnection.length, PORT, HOST, handleError);
+const connection = acc.send(requestConnection, 0, requestConnection.length, LISTENER_UDP, HOST, handleError);
 
 function requestTrackData(connectionIdentifier) {
     console.log(connectionIdentifier, 'requestTrackData')
     const requestTrackData = api.requestTrackData(connectionIdentifier);
-    acc.send(requestTrackData, 0, requestTrackData.length, PORT, HOST, () => {
+    acc.send(requestTrackData, 0, requestTrackData.length, LISTENER_UDP, HOST, () => {
         console.log('sent request for trackdata');
     });
 
@@ -332,7 +334,7 @@ function requestTrackData(connectionIdentifier) {
 function requestEntryList(connectionIdentifier) {
     console.log(connectionIdentifier, 'requestEntryList')
     const requestEntryList = api.requestEntryList(connectionIdentifier);
-    acc.send(requestEntryList, 0, requestEntryList.length, PORT, HOST, () => {
+    acc.send(requestEntryList, 0, requestEntryList.length, LISTENER_UDP, HOST, () => {
         console.log('sent request for entrylist');
     });
 }
