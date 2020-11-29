@@ -13,7 +13,7 @@ Some broadcasting tools for ACC. Still heavily work in progress and you probably
 * Configurable URL for grid order (now comes from ACRLonline)
 * Use qualification results for grid order
 * Fix the conditions panel
-* Create "track intro" page, real track maps from somewhere and data from UDD API
+* Create "track intro" page, real track maps from somewhere and data from UDP API
 * 
 ## Basic installation
 
