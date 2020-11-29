@@ -14,7 +14,7 @@ const io = require('socket.io')(server);
 const mustacheExpress = require('mustache-express');
 const gridOrder = require('./grid');
 const events = require('events');
-
+const cars = require('./cars')
 /*USER DEFINED CONSTANTS */
 const cfg = require('config');
 const HTTP_PORT = cgf.HTTP_PORT;
@@ -155,6 +155,8 @@ acc.on('message', message => {
                 entryListCar.carId = reader.ReadUInt16();
 
                 entryListCar.carModelType = reader.ReadBytes(1).readInt8(0); // Byte sized car model
+                entryListCar.carModel = cars[entryListCar.carModelType].model;
+                entryListCar.carclass = cars[entryListCar.carModelType].class;
                 entryListCar.teamName = helpers.readString(reader);
                 entryListCar.raceNumber = reader.ReadInt32();
                 entryListCar.cupCategory = reader.ReadBytes(1).readInt8(0);
