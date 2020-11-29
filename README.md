@@ -3,10 +3,18 @@
 
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
-Some broadcasting tools for ACC. Still heavily work in progress!
+Some broadcasting tools for ACC. Still heavily work in progress and you probably shouldn't even use them :D
 
 ---
 
+## TODO
+
+* Improve logic behind fastest laps to acknowledge multiclass races
+* Configurable URL for grid order (now comes from ACRLonline)
+* Use qualification results for grid order
+* Fix the conditions panel
+* Create "track intro" page, real track maps from somewhere and data from UDD API
+* 
 ## Basic installation
 
 - Create a config.js to app folder. Should look like this:
