@@ -202,25 +202,19 @@ acc.on('message', message => {
                         realtimeTick.sessionIndex = reader2.ReadUInt16();
                         realtimeTick.sessionType = reader2.ReadBytes(1).readUInt8(0);
                         realtimeTick.phase = reader2.ReadBytes(1).readUInt8(0);
-                        //const sessionTime = reader.ReadBytes(4).ReadFloat(0);
-                        //or
                         realtimeTick.sessionTime = reader2.ReadFloat();
-                        // > update.SessionTime = TimeSpan.FromMilliseconds(sessionTime);
                         realtimeTick.sessionEndTime = reader2.ReadFloat();
-                        // > update.SessionTime = TimeSpan.FromMilliseconds(sessionTime);
                         realtimeTick.focusedCarIndex = reader2.ReadInt32();
                         realtimeTick.activeCameraSet = helpers.readString(reader2);
                         realtimeTick.activeCamera = helpers.readString(reader2);
                         realtimeTick.currentHudPage = helpers.readString(reader2);
 
-                        //for replay, need to read anyway due to how the reader works
                         realtimeTick.isReplayPlaying = reader2.ReadBytes(1) > 0;
                         if (realtimeTick.isReplayPlaying) {
                             realtimeTick.replaySessionTime = reader2.ReadFloat();
                             realtimeTick.replayRemainingTime = reader2.ReadFloat();
                         }
 
-                        //const timeOfDay = TimeSpan.FromMilliseconds(br.ReadSingle());
                         realtimeTick.timeOfDay = reader2.ReadFloat();
                         realtimeTick.timeOfDay = helpers.humanReadabletimeOfDay(realtimeTick.timeOfDay);
                         realtimeTick.ambientTemp = reader2.ReadBytes(1).readUInt8();
@@ -234,7 +228,6 @@ acc.on('message', message => {
                         if (bestLap != undefined) {
                             fl.emit('FastestLap', bestLap)
                         }
-                        //console.log(realtimeTick.sessionBestLap);
                         //jsonWriter.writeConditionsToFile(realtimeTick);
                         globalRealtimeTick = realtimeTick;
 
@@ -284,7 +277,6 @@ acc.on('message', message => {
                     realtimeCarUpdateTick.laps = reader.ReadUInt16();
 
                     const delta = reader.ReadUInt32();
-                    //TODO read laps
                     realtimeCarUpdateTick.BestSessionLap = helpers.readLap(reader);
                     realtimeCarUpdateTick.LastLap = helpers.readLap(reader);
                     realtimeCarUpdateTick.CurrentLap = helpers.readLap(reader);

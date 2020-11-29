@@ -7,7 +7,11 @@
     <link rel="stylesheet" href="https://tiko.jamk.fi/~polkte/reveal-presikset/custom_files/fontawesome/css/all.css">
     <link rel="stylesheet"
         href="https://tiko.jamk.fi/~polkte/reveal-presikset/custom_files/fontawesome/css/font-awesome-color-brand.css">
-        <script src="https://kyng.asuscomm.com/socket.io/socket.io.js"></script>
+    <!--THIS IS SHIT AND YOU SHOULDNT DO THIS, USE THIS WHEN DEVELOPING LOCALLY: 
+        //add this to the actual config :D 
+        <script src="/socket.io/socket.io.js"></script>
+    -->
+    <script src="https://kyng.asuscomm.com/socket.io/socket.io.js"></script>
 
 
     <title>Document</title>
@@ -38,10 +42,10 @@
     </div>
     <script src="https://tiko.jamk.fi/~polkte/reveal-presikset/custom_files/fontawesome/js/all.js"></script>
     <script type="text/javascript">
-        const socket = io.connect("https://kyng.asuscomm.com");
+        const dev = "http://localhost:3001"
+        const prod = "https://kyng.asuscomm.com"
+        const socket = io.connect(dev);
         io.origins('*:*')
-        //Joka kerta kun 'message_to_client' -tapahtuma saapuu serveriltä
-        //laitetaan data diviin joka id on chat. Lisätään myös vanhat viestit perään
         socket.on("update", (data) => {
             console.log('getting update');
             console.log(data.ambientTemp,

@@ -4,6 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--THIS IS SHIT AND YOU SHOULDNT DO THIS, USE THIS WHEN DEVELOPING LOCALLY: 
+        //add this to the actual config :D 
+        <script src="/socket.io/socket.io.js"></script>
+    -->
     <script src="https://kyng.asuscomm.com/socket.io/socket.io.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Ropa+Sans:ital@1&display=swap" rel="stylesheet">
@@ -165,9 +169,10 @@
 
     </div>
     <script type="text/javascript">
-        
-        
-        const socket = io.connect("https://kyng.asuscomm.com");
+        //add this to the actual config :D 
+        const dev = "http://localhost:3001"
+        const prod = "https://kyng.asuscomm.com"
+        const socket = io.connect(dev);
         socket.on("fastest_lap_update", (data) => {
             console.log('getting update');
             console.log(data.laptimeHr, data.teamName, data.carNumber)
