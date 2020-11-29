@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://tiko.jamk.fi/~polkte/reveal-presikset/custom_files/fontawesome/css/all.css">
+    <link rel="stylesheet"
+        href="https://tiko.jamk.fi/~polkte/reveal-presikset/custom_files/fontawesome/css/font-awesome-color-brand.css">
+        <script src="https://kyng.asuscomm.com/socket.io/socket.io.js"></script>
+
+
+    <title>Document</title>
+    <style>
+        #container {
+            display: flex;
+            margin: 25px;
+            flex-direction: column;
+        }
+
+        #container {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <h4>Conditions</h4>
+        <div><i class="far fa-sun"></i>: <span id="ambientTemp"></span></div>
+        <div><i class="fas fa-road"></i>: <span id="trackTemp"></span></div>
+
+        <div><i class="fas fa-cloud"></i>: <span id="clouds"></span></div>
+        <div><i class="fas fa-water"></i>: <span id="rainlevel"></span></div>
+        <div><i class="fas fa-water"></i>: <span id="wetness"></span></div>
+
+        <div></div>
+    </div>
+    <script src="https://tiko.jamk.fi/~polkte/reveal-presikset/custom_files/fontawesome/js/all.js"></script>
+    <script type="text/javascript">
+        const socket = io.connect("https://kyng.asuscomm.com");
+        io.origins('*:*')
+        //Joka kerta kun 'message_to_client' -tapahtuma saapuu serveriltä
+        //laitetaan data diviin joka id on chat. Lisätään myös vanhat viestit perään
+        socket.on("update", (data) => {
+            console.log('getting update');
+            console.log(data.ambientTemp,
+                data.trackTemp,
+                data.clouds,
+                data.rainLevel,
+                data.wetness)
+                document.getElementById("ambientTemp").innerHTML = data.ambientTemp;
+            document.getElementById("trackTemp").innerHTML = data.trackTemp;
+            document.getElementById("clouds").innerHTML = data.clouds;
+            document.getElementById("rainlevel").innerHTML = data.rainLevel;
+            document.getElementById("wetness").innerHTML = data.wetness;
+        });
+        setInterval(sendMessage, 1000)
+        function sendMessage() {
+            console.log('wanting update');
+            socket.emit("update");
+        }
+    </script>
+</body>
+
+</html>

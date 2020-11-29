@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Ropa+Sans:ital@1&display=swap" rel="stylesheet"> 
+
+	<style>
+				@-webkit-keyframes hide {
+			0% {
+				opacity: 0;
+				visibility: hidden;
+				/*visibility: collapse;*/
+			}
+
+			100% {
+				opacity: 0;
+				visibility: hidden;
+			}
+		}
+
+		@-webkit-keyframes bounceIn1 {
+
+			0%,
+			33%,
+			66%,
+			100% {
+				animation-timing-function: cubic-bezier(.5, 0, .5, 1);
+			}
+
+			0% {
+				transform: scale3d(.1, .1, .1);
+				opacity: 0;
+			}
+
+			33% {
+				transform: scale3d(1.02, 1.02, 1.02);
+				opacity: 1;
+			}
+
+			66% {
+				transform: scale3d(0.995, 0.995, 0.995);
+			}
+
+			100% {
+				transform: scale3d(1.0, 1.0, 1.0);
+			}
+		}
+
+		@-webkit-keyframes bounceOut1 {
+
+			0%,
+			33%,
+			66%,
+			100% {
+				animation-timing-function: cubic-bezier(.5, 0, .5, 1);
+			}
+
+			100% {
+				transform: scale3d(.1, .1, .1);
+				opacity: 0;
+			}
+
+			66% {
+				transform: scale3d(1.0, 1.0, 1.0);
+				opacity: 1;
+			}
+
+			33% {
+				transform: scale3d(1.0, 1.0, 1.0);
+			}
+
+			0% {
+				transform: scale3d(1.0, 1.0, 1.0);
+			}
+		}
+
+		@-webkit-keyframes scrollAbove {
+			0% {
+				left: 0px;
+				top: 0px;
+			}
+
+			100% {
+				left: 0px;
+				top: -15000px;
+			}
+
+		}
+
+		.left-column > .car-card:nth-child(1) {
+			-webkit-animation: hide 1.2s 0s 1, bounceIn1 1.1s 1.1s, 1;
+		}
+		.left-column > .car-card:nth-child(2) {
+			-webkit-animation: hide 1.6s 0s 1, bounceIn1 1.1s 1.5s, 1;
+		}
+		.left-column > .car-card:nth-child(3) {
+			-webkit-animation: hide 2s 0s 1, bounceIn1 1.1s 1.9s, 1;
+		}
+
+		.right-column > .car-card:nth-child(1) {
+			-webkit-animation: hide 1.4s 0s 1, bounceIn1 1.1s 1.3s, 1;
+		}
+		.right-column > .car-card:nth-child(2) {
+			-webkit-animation: hide 1.8s 0s 1, bounceIn1 1.1s 1.7s, 1;
+		}
+		.right-column > .car-card:nth-child(3) {
+			-webkit-animation: hide 2.2s 0s 1, bounceIn1 1.1s 2.1s, 1;
+		}
+
+		* {
+			color: rgb(248, 242, 242);
+		}
+		body {
+			font-family: 'Source Sans Pro Semi-bold', sans-serif;
+			overflow: hidden;
+			font-family: 'Source Sans Pro', sans-serif;
+
+		}
+
+
+		main {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			column-gap: 100px;
+			max-width: 900px;
+			padding: 200px 200px;
+			margin: auto;
+			background-color: rgba(0, 0, 0, 0.7);
+		/*	background-color: darkcyan;*/
+		}
+
+		.car-card {
+			background-image: url('./views/merc.png');
+			background-color: rgba(0,0,0, 0.7);
+			background-position: -5px -5px;
+			background-size: 310px 600px;
+			width: 300px;
+			height: 600px;
+			margin-top: 120px;
+			display: grid;
+			grid-template-columns: 1fr;
+			grid-template-rows: 0px 120px 90px 0.5fr 1fr 1fr;
+			align-items: center;
+			position: relative;
+			border-top: 12px solid rgba(231, 219, 219, 0.5);
+
+		}
+		.right-column {
+			margin-top: 250px;
+			position: relative;
+
+		}
+		.car-card > * {
+  			justify-self: center;
+		}
+		.car-card h3 {
+			font-weight: 500;
+			align-self: center;
+			font-size: 26px;
+			margin-top: 24px;
+			text-align: center;
+			width: 270px;
+			height: 70px;
+			margin-bottom: 8px;
+			border-bottom: 2px solid salmon;
+		}
+
+		.car-card h4 {
+			font-size: 22px;
+			margin-top: 8px;
+			text-align: center;
+			width: 100%;
+			margin-bottom: 4px;
+		}
+
+		#border-left {
+			border-left: 12px solid rgba(230, 221, 221, 0.5);
+			position: absolute;
+			height: 40%;
+			left: 0px;
+		}
+
+		#border-right {
+			border-left: 12px solid rgba(233, 224, 224, 0.5);
+			position: absolute;
+			height: 40%;
+			right: 0px;
+		}
+
+		#container {
+			animation-name: scrollAbove; 
+			-webkit-animation-duration: 120s;
+			-webkit-animation-delay: 6s;
+			-webkit-animation-timing-function: linear;
+			position: relative;
+			width: 100vw;
+			height: 100vh;
+		}
+		.main-driver, .secondary-driver {
+			display: flex;
+			align-items: center;
+			margin: 0;
+		}
+		.main-driver > img, .secondary-driver > img {
+			margin-left: 6px;
+		}
+		h4, h5 {
+			font-weight: 400;
+			font-size: 28px;
+
+		}
+		.main-driver {
+			height: 28px;
+		}
+		h3 > span {
+			font-size: 80px;
+			position: absolute;
+			left: -100px;
+			top: -5px;
+			margin-bottom: 4px;
+			padding-right: 70px;
+			padding-left: 5px;
+			border-bottom: 2px solid salmon;
+			color: black;
+			font-family: 'Ropa Sans', sans-serif;
+			font-size: 100px;
+			text-shadow:
+   				-2px -2px 0 #fff,  
+    			2px -2px 0 #fff,
+    			-2px 2px 0 #fff,
+     			2px 2px 0 #fff;
+			text-align: right;
+
+		}
+		.car-number {
+			font-family: 'Ropa Sans', sans-serif;
+			font-size: 100px;
+		}
+		.car-card .car-number {
+			margin-top: 50px;
+			margin-bottom: 50px;
+		}
+		.timing {
+			font-size: 22px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+		.mstoleader {
+			font-size: 20px;
+			font-weight: 300;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="container">
+		<main>
+			<div class="left-column">
+				{{#leftColumn}}
+				<div class="car-card">
+					<div>
+						<div id="border-left"></div>
+						<div id="border-right"></div>
+					</div>
+					<h3><span>{{pq}}.</span>{{team}}</h3>
+					<div class="secondary-drivers">
+						<div class="main-driver"><h4>{{drivers.0.name}} </h4><img src="https://www.countryflags.io/{{drivers.0.country}}/shiny/32.png"></div>
+						{{#drivers.1.name}}
+							{{#drivers.1.name}}
+							<div class="main-driver"><h4>{{drivers.1.name}} </h4><img src="https://www.countryflags.io/{{drivers.1.country}}/shiny/32.png"></div>
+							{{/drivers.1.name}}
+							{{^drivers.1.name}}
+							<div class="main-driver"><h4>{{drivers.1.name}}</h4></div>
+							{{/drivers.1.name}}
+						{{/drivers.1.name}}
+						{{#drivers.2.name}}
+							{{#drivers.2.name}}
+							<div class="main-driver"><h4>{{drivers.2.name}} </h4><img src="https://www.countryflags.io/{{drivers.2.country}}/shiny/32.png"></div>
+							{{/drivers.2.name}}
+							{{^drivers.2.name}}
+							<div class="main-driver"><h4>{{drivers.2.name}}</h4></div>
+							{{/drivers.2.name}}
+						{{/drivers.2.name}}
+					</div>
+					<div class="timing">
+						<span class="laptime">{{laptime}} </span><span class="mstoleader">(+{{msToLeader}})</span>
+					</div>
+
+					<div class="car-number">
+						{{no}}
+					</div>
+				</div>
+				{{/leftColumn}}
+
+			</div>
+			<div class="right-column">
+				{{#rightColumn}}
+				<div class="car-card">
+					<div>
+						<div id="border-left"></div>
+						<div id="border-right"></div>
+					</div>
+					<h3><span>{{pq}}.</span>{{team}}</h3>
+					<div class="secondary-drivers">
+						<div class="main-driver"><h4>{{drivers.0.name}} </h4><img src="https://www.countryflags.io/{{drivers.0.country}}/shiny/32.png"></div>
+						{{#drivers.1.name}}
+							{{#drivers.1.name}}
+							<div class="main-driver"><h4>{{drivers.1.name}} </h4><img src="https://www.countryflags.io/{{drivers.1.country}}/shiny/32.png"></div>
+							{{/drivers.1.name}}
+							{{^drivers.1.name}}
+							<div class="main-driver"><h4>{{drivers.1.name}}</h4></div>
+							{{/drivers.1.name}}
+						{{/drivers.1.name}}
+						{{#drivers.2.name}}
+							{{#drivers.2.name}}
+							<div class="main-driver"><h4>{{drivers.2.name}} </h4><img src="https://www.countryflags.io/{{drivers.2.country}}/shiny/32.png"></div>
+							{{/drivers.2.name}}
+							{{^drivers.2.name}}
+							<div class="main-driver"><h4>{{drivers.2.name}}</h4></div>
+							{{/drivers.2.name}}
+						{{/drivers.2.name}}
+					</div>	
+					<div class="timing">
+						<span class="laptime">{{laptime}} </span><span class="mstoleader">(+{{msToLeader}})</span>
+					</div>
+					<div class="car-number">
+						{{no}}
+					</div>
+
+				</div>
+				{{/rightColumn}}
+			</div>
+
+		</main>
+	</div>
+</body>
+
+</html>

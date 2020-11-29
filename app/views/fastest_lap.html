@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kyng.asuscomm.com/socket.io/socket.io.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Ropa+Sans:ital@1&display=swap" rel="stylesheet">
+
+
+    <title>Document</title>
+    <style>
+        * {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            color: rgb(238, 231, 231);
+            padding: 0;
+            font-weight: 300;
+        }
+
+        @-webkit-keyframes bounceIn1 {
+
+            0%,
+            33%,
+            66%,
+            100% {
+                animation-timing-function: cubic-bezier(.5, 0, .5, 1);
+            }
+
+            0% {
+                transform: scale3d(.1, .1, .1);
+                visibility: hidden;
+                opacity: 0;
+            }
+
+            33% {
+                transform: scale3d(1.04, 1.04, 1.02);
+                visibility: visible;
+                opacity: 1;
+            }
+
+            66% {
+                transform: scale3d(0.995, 0.995, 0.995);
+                visibility: visible;
+                opacity: 1;
+
+            }
+
+            100% {
+                transform: scale3d(1.0, 1.0, 1.0);
+                visibility: visible;
+                opacity: 1;
+            }
+        }
+
+        @-webkit-keyframes bounceOut1 {
+
+            0%,
+            33%,
+            66%,
+            100% {
+                animation-timing-function: cubic-bezier(.5, 0, .5, 1);
+            }
+
+            100% {
+                transform: scale3d(.1, .1, .1);
+                opacity: 0;
+            }
+
+            66% {
+                transform: scale3d(1.0, 1.0, 1.0);
+                opacity: 1;
+            }
+
+            33% {
+                transform: scale3d(1.0, 1.0, 1.0);
+            }
+
+            0% {
+                transform: scale3d(1.0, 1.0, 1.0);
+            }
+        }
+
+        .anim {
+            -webkit-animation: bounceIn1 1s 0s 1, bounceOut1 1s 10s 1;
+        }
+
+        #container {
+            visibility: hidden;
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            grid-template-rows: 32px 2fr;
+            width: 320px;
+            margin: 25px;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        #car-number {
+            font-family: 'Ropa Sans', sans-serif;
+            font-weight: 200;
+            font-size: 50px;
+            padding-left: 10px;
+            margin-right: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            background: linear-gradient(270deg, rgba(0, 0, 0, 0.0) 0%, rgba(250, 126, 112, 1) 60%, rgba(250, 126, 112, 1) 100%, rgba(0, 212, 255, 1) 100%);
+        }
+
+        #fastest-lap {
+            font-size: 20px;
+            padding-left: 8px;
+            font-weight: 300;
+
+        }
+
+        #lap-time {
+            grid-column-start: 2;
+            grid-row-start: 3;
+            padding-bottom: 5px;
+            font-size: 20px;
+            font-weight: 300;
+            margin: auto 0;
+
+        }
+
+        #name-container {
+            font-size: 18px;
+            margin: auto 0;
+            justify-self: center;
+            line-height: 90%;
+            padding: 8px 2px;
+        }
+
+        #first-row {
+            grid-column: 1/3;
+            display: flex;
+            justify-content: space-between;
+            font-size: 20px;
+            border-bottom: 2px solid #fa7e70 !important;
+            padding: 2px 8px 0px 8px;
+            background: rgb(0, 0, 0);
+            background: linear-gradient(90deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 65%, rgba(250, 126, 112, 1) 100%);
+        }
+
+        #driver-name {
+            font-size: 22px;
+            margin-bottom: 2px;
+            padding-bottom: 2px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id="first-row">
+            <h4 id="fastest-lap">Fastest lap</h4>
+            <div id="lap-time">1:58:205</div>
+        </div>
+        <div id="car-number">#742</div>
+        <div id="name-container">
+            <div id="driver-name">Michael Kundakcioglu</div>
+            <div id="team-name">Supernova Racing</div>
+        </div>
+
+    </div>
+    <script type="text/javascript">
+        
+        
+        const socket = io.connect("https://kyng.asuscomm.com");
+        socket.on("fastest_lap_update", (data) => {
+            console.log('getting update');
+            console.log(data.laptimeHr, data.teamName, data.carNumber)
+            document.getElementById("lap-time").innerHTML = `${data.laptimeHr}`;
+            document.getElementById("team-name").innerHTML = `${data.teamName}`;
+            document.getElementById("car-number").innerHTML = `#${data.carNumber}`;
+            document.getElementById("driver-name").innerHTML = `#${data.driver}`;
+            runAnim();
+        });
+
+
+        function runAnim() {
+            console.log('animation running')
+            let container = document.getElementById("container");
+            container.classList.add("anim");
+            container.style.visibility = "visible"
+            setTimeout(function () { container.style.visibility = "hidden", container.classList.remove("anim"); }, 11000);
+        }
+        /*
+        setInterval(runAnim, 13000) 
+        runAnim()
+*/
+    </script>
+
+</body>
+
+</html>
